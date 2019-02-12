@@ -150,12 +150,13 @@ public class AboutStrings {
 
     @Koan
     public void readableStringFormattingWithStringFormat() {
-        assertEquals(String.format("%s %s %s", "a", "b", "a"), __);
+        assertEquals(String.format("%s %s %s", "a", "b", "a"), "a b a");
+        //Note the spaces in between the %s
     }
 
     @Koan
     public void extraArgumentsToStringFormatGetIgnored() {
-        assertEquals(String.format("%s %s %s", "a", "b", "c", "d"), __);
+        assertEquals(String.format("%s %s %s", "a", "b", "c", "d"), "a b c");
     }
 
     @Koan
@@ -164,23 +165,25 @@ public class AboutStrings {
             String.format("%s %s %s", "a", "b");
             fail("No Exception was thrown!");
         } catch (Exception e) {
-            assertEquals(e.getClass(), __);
-            assertEquals(e.getMessage(), __);
+            assertEquals(e.getClass(), java.util.MissingFormatArgumentException.class);
+            assertEquals(e.getMessage(), "Format specifier '%s'");
+            // https://docs.oracle.com/javase/7/docs/api/java/util/MissingFormatArgumentException.html
         }
     }
 
     @Koan
     public void readableStringFormattingWithMessageFormat() {
-        assertEquals(MessageFormat.format("{0} {1} {0}", "a", "b"), __);
+        assertEquals(MessageFormat.format("{0} {1} {0}", "a", "b"), "a b a");
     }
 
     @Koan
     public void extraArgumentsToMessageFormatGetIgnored() {
-        assertEquals(MessageFormat.format("{0} {1} {0}", "a", "b", "c"), __);
+        assertEquals(MessageFormat.format("{0} {1} {0}", "a", "b", "c"), "a b a");
     }
 
     @Koan
     public void insufficientArgumentsToMessageFormatDoesNotReplaceTheToken() {
-        assertEquals(MessageFormat.format("{0} {1} {0}", "a"), __);
+        assertEquals(MessageFormat.format("{0} {1} {0}", "a"), "a {1} a");
+        // If the arguement is not provided, just print the {1}
     }
 }
