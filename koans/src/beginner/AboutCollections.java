@@ -21,9 +21,9 @@ public class AboutCollections {
         list.add("Chicken");
         list.add("Dog");
         list.add("Chicken");
-        assertEquals(list.get(0), __);
-        assertEquals(list.get(1), __);
-        assertEquals(list.get(2), __);
+        assertEquals(list.get(0), "Chicken");
+        assertEquals(list.get(1), "Dog");
+        assertEquals(list.get(2), "Chicken");
     }
 
     @Koan
@@ -33,12 +33,12 @@ public class AboutCollections {
         // PriorityQueue: simple queue implementation
         queue.add("Cat");
         queue.add("Dog");
-        assertEquals(queue.peek(), __);
-        assertEquals(queue.size(), __);
-        assertEquals(queue.poll(), __);
-        assertEquals(queue.size(), __);
-        assertEquals(queue.poll(), __);
-        assertEquals(queue.isEmpty(), __);
+        assertEquals(queue.peek(), "Cat");
+        assertEquals(queue.size(), 2);
+        assertEquals(queue.poll(), "Cat");
+        assertEquals(queue.size(), 1);
+        assertEquals(queue.poll(), "Dog");
+        assertEquals(queue.isEmpty(), true);
     }
 
     @Koan
@@ -47,10 +47,11 @@ public class AboutCollections {
         set.add("Dog");
         set.add("Cat");
         set.add("Dog");
-        assertEquals(set.size(), __);
-        assertEquals(set.contains("Dog"), __);
-        assertEquals(set.contains("Cat"), __);
-        assertEquals(set.contains("Chicken"), __);
+        assertEquals(set.size(), 2);
+        // List index not keys
+        assertEquals(set.contains("Dog"), true);
+        assertEquals(set.contains("Cat"), true);
+        assertEquals(set.contains("Chicken"), false);
     }
 
     @Koan
@@ -59,11 +60,12 @@ public class AboutCollections {
         map.put("first key", "first value");
         map.put("second key", "second value");
         map.put("first key", "other value");
-        assertEquals(map.size(), __);
-        assertEquals(map.containsKey("first key"), __);
-        assertEquals(map.containsKey("second key"), __);
-        assertEquals(map.containsValue("first value"), __);
-        assertEquals(map.get("first key"), __);
+        //Keys and values
+        assertEquals(map.size(), 2);
+        assertEquals(map.containsKey("first key"), true);
+        assertEquals(map.containsKey("second key"), true);
+        assertEquals(map.containsValue("first value"), false);
+        assertEquals(map.get("first key"), "other value");
     }
 
     @Koan
@@ -71,9 +73,9 @@ public class AboutCollections {
         String[] array = {"a", "b", "c"};
         List<String> list = Arrays.asList(array);
         list.set(0, "x");
-        assertEquals(array[0], __);
+        assertEquals(array[0], "x");
         array[0] = "a";
-        assertEquals(list.get(0), __);
+        assertEquals(list.get(0), "a");
         // Just think of it as quantum state teleportation...
     }
 
@@ -86,12 +88,14 @@ public class AboutCollections {
         map.put("e", "Emu");
         map.put("f", "Fox");
         SortedMap<String, String> backedMap = map.subMap("c", "f");
-        assertEquals(backedMap.size(), __);
-        assertEquals(map.size(), __);
+        // From c inclusive to f exclusive
+        assertEquals(backedMap.size(), 2);
+        assertEquals(map.size(), 5);
         backedMap.put("d", "Dog");
-        assertEquals(backedMap.size(), __);
-        assertEquals(map.size(), __);
-        assertEquals(map.containsKey("d"), __);
+        //Adds to map
+        assertEquals(backedMap.size(), 3);
+        assertEquals(map.size(), 6);
+        assertEquals(map.containsKey("d"), true);
         // Again: backed maps are just like those little quantum states
         // that are connected forever...
     }
@@ -102,8 +106,8 @@ public class AboutCollections {
         sorted.add("c");
         sorted.add("z");
         sorted.add("a");
-        assertEquals(sorted.first(), __);
-        assertEquals(sorted.last(), __);
+        assertEquals(sorted.first(), "a");
+        assertEquals(sorted.last(), "z");
         // Look at the different constructors for a TreeSet (or TreeMap)
         // Ponder how you might influence the sort order. Hold that thought
         // until you approach AboutComparison
@@ -113,9 +117,12 @@ public class AboutCollections {
         ordered.add("z");
         ordered.add("a");
         StringBuffer sb = new StringBuffer();
+        // String Buffer similar to strings except:
+        //StringBuffer represents growable and writable character sequences.
+        //i.e.mutable
         for (String s : ordered) {
             sb.append(s);
         }
-        assertEquals(sb.toString(), __);
+        assertEquals(sb.toString(), "cza");
     }
 }
