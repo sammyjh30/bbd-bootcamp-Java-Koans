@@ -20,6 +20,9 @@ public class AboutDates {
     public void dateToString() {
         assertEquals(date.toString(), "Sat Mar 03 14:33:21 CAT 1973");
         //Java Date() can convert longs to dates based off milliseconds
+
+        //This is stored as longs because it saves memory.
+        // Longs are 64 bits, but strings would be much more memory
     }
 
     @Koan
